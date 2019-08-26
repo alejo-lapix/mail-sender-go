@@ -10,7 +10,7 @@ func NewGoMailer(dialer *gomail.Dialer) *goMailSender {
 	return &goMailSender{dialer: dialer}
 }
 
-func (mailer *goMailSender) Send(messages ...Message) error {
+func (mailer *goMailSender) Send(messages ...message) error {
 	format := gomail.NewMessage()
 	stack := make([]*gomail.Message, len(messages))
 
