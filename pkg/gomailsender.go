@@ -14,7 +14,7 @@ func (mailer *goMailSender) Send(messages ...message) error {
 	format := gomail.NewMessage()
 	stack := make([]*gomail.Message, len(messages))
 
-	for _, message := range messages {
+	for index, message := range messages {
 		format.SetHeader("From", message.from)
 		format.SetHeader("To", message.to...)
 		format.SetHeader("Subject", message.subject)
@@ -24,7 +24,7 @@ func (mailer *goMailSender) Send(messages ...message) error {
 			format.Attach(path)
 		}
 
-		stack = append(stack, format)
+		stack[index] = format
 	}
 
 	return mailer.dialer.DialAndSend(stack...)
